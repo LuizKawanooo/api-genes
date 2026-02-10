@@ -1,6 +1,6 @@
 <?php
 
-$conn = new mysqli("HOST", "USER", "PASS", "DB");
+$conn = new mysqli("genes.mysql.uhserver.com", "genes_user", "{[Genes2019", "genes");
 
 $senhaHash = password_hash("123456", PASSWORD_DEFAULT);
 

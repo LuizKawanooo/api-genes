@@ -3,7 +3,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
-$conn = new mysqli("SEU_HOST", "SEU_USER", "SUA_SENHA", "SEU_BANCO");
+$conn = new mysqli("genes.mysql.uhserver.com", "genes_user", "{[Genes2019@", "genes");
 
 if ($conn->connect_error) {
     die(json_encode(["success" => false, "message" => "Erro conexão"]));
@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 
 $data = json_decode(file_get_contents("php://input"));
 
-$email = $data->email ?? '';
+$email = isset($_POST['email']) ? $_POST['email'] : ''; 
 $password = $data->password ?? '';
 
 $sql = "SELECT * FROM users WHERE email = ?";
