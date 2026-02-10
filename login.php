@@ -9,10 +9,9 @@ if ($conn->connect_error) {
     die(json_encode(["success" => false, "message" => "Erro conexão"]));
 }
 
-$data = json_decode(file_get_contents("php://input"));
-
-$email = isset($_POST['email']) ? $_POST['email'] : ''; 
-$password = $data->password ?? '';
+// PEGANDO POST
+$email = isset($_POST['email']) ? $_POST['email'] : '';
+$password = isset($_POST['password']) ? $_POST['password'] : '';
 
 $sql = "SELECT * FROM users WHERE email = ?";
 $stmt = $conn->prepare($sql);
@@ -21,7 +20,7 @@ $stmt->execute();
 
 $result = $stmt->get_result();
 
-if ($result->num_rows === 0) {
+if ($result->num_rows == 0) {
     echo json_encode(["success" => false, "message" => "Usuário não encontrado"]);
     exit;
 }
